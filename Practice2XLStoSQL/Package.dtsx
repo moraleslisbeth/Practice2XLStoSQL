@@ -1,0 +1,1154 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/29/2022 1:51:52 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-JOJ0HQAI"
+  DTS:CreatorName="LAPTOP-JOJ0HQAI\user"
+  DTS:DTSID="{70F88754-B70B-4DFA-BAE1-F8B3ECA1A665}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{DED6E800-4946-4F48-9308-33212E068F25}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{0F8FE5EA-8B7D-4103-9675-CED936AA3095}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\user\Downloads\Lista_Estudiantes.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-JOJ0HQAI\SQLSERVER.EstudiantesLM]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{167737A6-A743-4687-AD1D-BD636FAF5F17}"
+      DTS:ObjectName="LAPTOP-JOJ0HQAI\SQLSERVER.EstudiantesLM">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-JOJ0HQAI\SQLSERVER;Initial Catalog=EstudiantesLM;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{167737A6-A743-4687-AD1D-BD636FAF5F17}LAPTOP-JOJ0HQAI\SQLSERVER.EstudiantesLM;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete from Lista_Estudiantes"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{08ECFA14-796F-4F6D-A078-A4393814629C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete from Lista_Estudiantes"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{167737A6-A743-4687-AD1D-BD636FAF5F17}"
+          SQLTask:SqlStatementSource="delete lista_estudiantes" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load from XLS to SQL"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{D272D5D7-7EA2-49E8-B387-2151264BE785}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load from XLS to SQL"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load from XLS to SQL\Conversión de datos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[Nombre del Estudiante]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre del Estudiante"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Nombre del Estudiante]" />
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[Matrícula]"
+                      cachedDataType="r8"
+                      cachedName="Matrícula"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Matrícula]" />
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[Correo-1]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Correo-1"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-1]" />
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[Correo-2]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Correo-2"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-2]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CNombre del Estudiante]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CNombre del Estudiante]"
+                      name="CNombre del Estudiante"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Nombre del Estudiante]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CMatrícula]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CMatrícula]"
+                      name="CMatrícula"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Matrícula]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CCorreo-1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="60"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CCorreo-1]"
+                      name="CCorreo-1"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-1]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CCorreo-2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="60"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CCorreo-2]"
+                      name="CCorreo-2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-2]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Load data into Lista_Estudiantes table"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[Lista_Estudiantes]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-JOJ0HQAI\SQLSERVER.EstudiantesLM]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-JOJ0HQAI\SQLSERVER.EstudiantesLM]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].Columns[CNombre del Estudiante]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CNombre del Estudiante"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[NOMBRE]"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CNombre del Estudiante]" />
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].Columns[CMatrícula]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="9"
+                      cachedName="CMatrícula"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[MATRICULA]"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CMatrícula]" />
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].Columns[CCorreo-1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="CCorreo-1"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[CORREO_1]"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CCorreo-1]" />
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].Columns[CCorreo-2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="CCorreo-2"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[CORREO_2]"
+                      lineageId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos].Columns[CCorreo-2]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[NOMBRE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NOMBRE" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[MATRICULA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      name="MATRICULA" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[CORREO_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="CORREO_1" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB].ExternalColumns[CORREO_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="CORREO_2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load from XLS to SQL\Read Estudiantes-F"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Read Estudiantes-F"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">StudentsF$</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load from XLS to SQL\Read Estudiantes-F.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Nombre del Estudiante]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Nombre del Estudiante]"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Nombre del Estudiante]"
+                      name="Nombre del Estudiante"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Matrícula]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Matrícula]"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Matrícula]"
+                      name="Matrícula"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Correo-1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Correo-1]"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Correo-1]"
+                      name="Correo-1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Correo-2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Correo-2]"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Correo-2]"
+                      name="Correo-2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Nombre del Estudiante]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre del Estudiante" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Matrícula]"
+                      dataType="r8"
+                      name="Matrícula" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Correo-1]"
+                      dataType="wstr"
+                      length="255"
+                      name="Correo-1" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].ExternalColumns[Correo-2]"
+                      dataType="wstr"
+                      length="255"
+                      name="Correo-2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Nombre del Estudiante]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Nombre del Estudiante]"
+                      name="Nombre del Estudiante" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Matrícula]"
+                      dataType="r8"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Matrícula]"
+                      name="Matrícula" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Correo-1]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Correo-1]"
+                      name="Correo-1" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Correo-2]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[Correo-2]"
+                      name="Correo-2" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load from XLS to SQL\Read Estudiantes-M"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origen de Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de Excel"
+              name="Read Estudiantes-M"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">StudentsM$</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="La asignación de parámetros del comando SQL a variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load from XLS to SQL\Read Estudiantes-M.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel]"
+                  name="Salida de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Nombre del Estudiante]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Nombre del Estudiante]"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Nombre del Estudiante]"
+                      name="Nombre del Estudiante"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Matrícula]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Matrícula]"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Matrícula]"
+                      name="Matrícula"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Correo-1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Correo-1]"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Correo-1]"
+                      name="Correo-1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Correo-2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Correo-2]"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Correo-2]"
+                      name="Correo-2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Nombre del Estudiante]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre del Estudiante" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Matrícula]"
+                      dataType="r8"
+                      name="Matrícula" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Correo-1]"
+                      dataType="wstr"
+                      length="255"
+                      name="Correo-1" />
+                    <externalMetadataColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].ExternalColumns[Correo-2]"
+                      dataType="wstr"
+                      length="255"
+                      name="Correo-2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Nombre del Estudiante]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Nombre del Estudiante]"
+                      name="Nombre del Estudiante" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Matrícula]"
+                      dataType="r8"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Matrícula]"
+                      name="Matrícula" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Correo-1]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Correo-1]"
+                      name="Correo-1" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Correo-2]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[Correo-2]"
+                      name="Correo-2" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de error de origen de Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load from XLS to SQL\Unión de todo"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Unión de todo;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina las filas de varios flujos de datos sin ordenarlos. Por ejemplo, devuelve filas a un flujo de datos después de corregir los errores. Si el orden es importante, se recomienda usar la transformación Mezclar."
+              name="Unión de todo"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+                  name="Entrada de Unión de todo 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Nombre del Estudiante]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre del Estudiante"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Nombre del Estudiante]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Nombre del Estudiante]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Matrícula]"
+                      cachedDataType="r8"
+                      cachedName="Matrícula"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Matrícula]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Matrícula]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Correo-1]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Correo-1"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Correo-1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-1]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 1].Columns[Correo-2]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Correo-2"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel].Columns[Correo-2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-2]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+                  hasSideEffects="true"
+                  name="Entrada de Unión de todo 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Nombre del Estudiante]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Nombre del Estudiante"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Nombre del Estudiante]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Nombre del Estudiante]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Matrícula]"
+                      cachedDataType="r8"
+                      cachedName="Matrícula"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Matrícula]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Matrícula]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Correo-1]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Correo-1"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Correo-1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-1]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 2].Columns[Correo-2]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Correo-2"
+                      lineageId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel].Columns[Correo-2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Id. de linaje de columna de salida"
+                          name="OutputColumnLineageID">#{Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-2]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Entrada de Unión de todo 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1]"
+                  name="Salida de Unión de todo 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Nombre del Estudiante]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Nombre del Estudiante]"
+                      name="Nombre del Estudiante" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Matrícula]"
+                      dataType="r8"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Matrícula]"
+                      name="Matrícula" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-1]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-1]"
+                      name="Correo-1" />
+                    <outputColumn
+                      refId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-2]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1].Columns[Correo-2]"
+                      name="Correo-2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load from XLS to SQL.Paths[Salida de conversión de datos]"
+              endId="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de conversión de datos"
+              startId="Package\Load from XLS to SQL\Conversión de datos.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\Load from XLS to SQL.Paths[Salida de origen de Excel]"
+              endId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 1]"
+              name="Salida de origen de Excel"
+              startId="Package\Load from XLS to SQL\Read Estudiantes-M.Outputs[Salida de origen de Excel]" />
+            <path
+              refId="Package\Load from XLS to SQL.Paths[Salida de origen de Excel1]"
+              endId="Package\Load from XLS to SQL\Unión de todo.Inputs[Entrada de Unión de todo 2]"
+              name="Salida de origen de Excel"
+              startId="Package\Load from XLS to SQL\Read Estudiantes-F.Outputs[Salida de origen de Excel]" />
+            <path
+              refId="Package\Load from XLS to SQL.Paths[Salida de Unión de todo 1]"
+              endId="Package\Load from XLS to SQL\Conversión de datos.Inputs[Entrada de conversión de datos]"
+              name="Salida de Unión de todo 1"
+              startId="Package\Load from XLS to SQL\Unión de todo.Outputs[Salida de Unión de todo 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7B495823-722B-4568-AE07-938AA6BB85C5}"
+      DTS:From="Package\Delete from Lista_Estudiantes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load from XLS to SQL" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="219,42"
+          Id="Package\Delete from Lista_Estudiantes"
+          TopLeft="340,25" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Load from XLS to SQL"
+          TopLeft="357,99" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="449,67">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load from XLS to SQL">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Load from XLS to SQL\Read Estudiantes-F"
+          TopLeft="506,29" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Load from XLS to SQL\Unión de todo"
+          TopLeft="371,102" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table"
+          TopLeft="322,265" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Load from XLS to SQL\Read Estudiantes-M"
+          TopLeft="189,29" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Load from XLS to SQL\Conversión de datos"
+          TopLeft="360,183" />
+        <EdgeLayout
+          Id="Package\Load from XLS to SQL.Paths[Salida de origen de Excel]"
+          TopLeft="275,71">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="145.666666666667,31"
+              Start="0,0"
+              End="145.666666666667,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.3969986357435" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.3969986357435"
+                    Point2="0,18.3969986357435"
+                    Point3="4,18.3969986357435" />
+                  <mssgle:LineSegment
+                    End="141.666666666667,18.3969986357435" />
+                  <mssgle:CubicBezierSegment
+                    Point1="141.666666666667,18.3969986357435"
+                    Point2="145.666666666667,18.3969986357435"
+                    Point3="145.666666666667,22.3969986357435" />
+                  <mssgle:LineSegment
+                    End="145.666666666667,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load from XLS to SQL.Paths[Salida de conversión de datos]"
+          TopLeft="449.25,225">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load from XLS to SQL.Paths[Salida de Unión de todo 1]"
+          TopLeft="445.5,144">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load from XLS to SQL.Paths[Salida de origen de Excel1]"
+          TopLeft="591,71">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-124.666666666667,31"
+              Start="0,0"
+              End="-124.666666666667,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.3969986357435" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.3969986357435"
+                    Point2="0,18.3969986357435"
+                    Point3="-4,18.3969986357435" />
+                  <mssgle:LineSegment
+                    End="-120.666666666667,18.3969986357435" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-120.666666666667,18.3969986357435"
+                    Point2="-124.666666666667,18.3969986357435"
+                    Point3="-124.666666666667,22.3969986357435" />
+                  <mssgle:LineSegment
+                    End="-124.666666666667,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load from XLS to SQL\Read Estudiantes-M">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load from XLS to SQL\Load data into Lista_Estudiantes table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load from XLS to SQL\Read Estudiantes-F">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
